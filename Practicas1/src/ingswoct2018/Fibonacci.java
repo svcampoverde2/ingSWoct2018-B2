@@ -1,5 +1,7 @@
 
 package ingswoct2018;
+import java.io.FileNotFoundException;
+import java.util.Formatter;
 import java.util.Scanner;
 public class Fibonacci {
     public static void main(String[] args) {
@@ -17,13 +19,24 @@ public class Fibonacci {
         post++;
         System.out.print(","+num2);
         post++;
+        try{
+           Formatter outArchivo = new Formatter("Los numeros de la serie.csv");
+                 outArchivo.format("La serie es:\n");
+                outArchivo.format("%d;",num1);
+                outArchivo.format("%d;",num2);
         while (post <= tope) { 
             temp = num1;
             num1 = num2;
             num2 = temp + num1;
+            outArchivo.format("%d;",num2); 
            System.out.print(","+num2);
            post++;
         }
-         System.out.println();
+        outArchivo.close();
+    }
+        catch(FileNotFoundException e){
+        System.out.println(e);    
+        }
+        System.out.println();
     }
 }
